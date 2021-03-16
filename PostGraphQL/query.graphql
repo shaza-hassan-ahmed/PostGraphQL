@@ -1,0 +1,36 @@
+query PostsUser($_eq: Int = 1) {
+  posts(where: {user_id: {_eq: $_eq}}) {
+    post_body
+    post_id
+    post_title
+    user_id
+  }
+}
+
+query User {
+  users {
+    user_id
+    first_name
+  }
+}
+
+query UsersLikeSamePost($where: posts_bool_exp =
+  {_and:
+    [{likes:{user_id:{_eq: 1}}},
+     {likes:{user_id:{_eq: 2}}},
+     {likes:{user_id:{_eq: 3}}}
+    ]
+    
+}
+) {
+  posts(where: $where) {
+    post_id
+  }
+}
+
+
+query MyQuery($where: posts_bool_exp = {post_id: {_eq: 1}}) {
+  posts(where: $where) {
+    post_id
+  }
+}
