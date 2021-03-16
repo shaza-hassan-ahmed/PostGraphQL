@@ -49,14 +49,14 @@ struct ContentView: View {
                 
                 
 //                {post_id: {_eq: 1}
-                var p : [posts_bool_exp] = [1,2,3].map{ id in
-                    var useID = Int_comparison_exp(_eq: id)
-                    var likes = likes_bool_exp(userId:useID)
-                    var postBool = posts_bool_exp(likes: likes)
+                let p : [posts_bool_exp] = [1,2,3].map{ id in
+                    let useID = Int_comparison_exp(_eq: id)
+                    let likes = likes_bool_exp(userId:useID)
+                    let postBool = posts_bool_exp(likes: likes)
                     return postBool
                 }
                 
-                var whereQueury = posts_bool_exp(_and:p)
+                let whereQueury = posts_bool_exp(_and:p)
                 
                 
                 Network.shared.apollo.fetch(query: UsersLikeSamePostQuery(where: whereQueury)){
